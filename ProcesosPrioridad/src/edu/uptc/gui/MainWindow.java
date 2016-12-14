@@ -3,9 +3,12 @@ package edu.uptc.gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import edu.uptc.logic.ManagementHilos;
+
 public class MainWindow extends JFrame {
 	
 	private MainPanel mainPanel;
+	private ManagementHilos mh;
 	
 	public MainWindow() {
 		this.setTitle("PROCESOS PRIORIDAD");
@@ -21,6 +24,7 @@ public class MainWindow extends JFrame {
 	private void beginComponents() {
 
 		mainPanel = new MainPanel(this);
+		mh = new ManagementHilos();
 		
 	}
 	
@@ -42,6 +46,11 @@ public class MainWindow extends JFrame {
 	public MainPanel getMainPanel() {
 		return mainPanel;
 	}
+
+	public ManagementHilos getMh() {
+		return mh;
+	}
+	
 	
 	
 
