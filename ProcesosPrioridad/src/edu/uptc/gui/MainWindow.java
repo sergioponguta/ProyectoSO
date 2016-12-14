@@ -5,15 +5,14 @@ import javax.swing.JPanel;
 
 public class MainWindow extends JFrame {
 	
-	private JPanel panel;
-	
+	private MainPanel mainPanel;
 	
 	public MainWindow() {
 		this.setTitle("PROCESOS PRIORIDAD");
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setSize(600,535);
 		this.setLocationRelativeTo(null);
-		this.setSize(500,500);
 		beginComponents();
 		addComponents();
 	
@@ -21,13 +20,13 @@ public class MainWindow extends JFrame {
 	
 	private void beginComponents() {
 
-		panel = new JPanel();
+		mainPanel = new MainPanel(this);
 		
 	}
 	
 	private void addComponents() {
 		
-		add(panel);
+		add(mainPanel);
 		
 	}
 
@@ -35,8 +34,15 @@ public class MainWindow extends JFrame {
 
 	public static void main(String[] args) {
 		
-		
+		MainWindow mw = new MainWindow();
+		mw.setVisible(true);
 		
 	}
+
+	public MainPanel getMainPanel() {
+		return mainPanel;
+	}
+	
+	
 
 }
