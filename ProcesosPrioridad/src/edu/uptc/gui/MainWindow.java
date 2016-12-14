@@ -11,7 +11,7 @@ public class MainWindow extends JFrame {
 		this.setTitle("PROCESOS PRIORIDAD");
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(600,535);
+		this.setSize(600,435);
 		this.setLocationRelativeTo(null);
 		beginComponents();
 		addComponents();
