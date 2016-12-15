@@ -1,6 +1,6 @@
 package edu.uptc.logic;
 
-public class Hilo {
+public class Hilo implements Comparable<Hilo> {
 
 	private int prioridad;
 	private String nombre;
@@ -61,6 +61,12 @@ public class Hilo {
 	public String toString() {
 		return "Hilo [prioridad=" + prioridad + ", nombre=" + nombre
 				+ ", duracion=" + duracion + ", estado=" + estado + "]";
+	}
+
+
+	@Override
+	public int compareTo(Hilo o) {
+		return this.getPrioridad()-o.getPrioridad();
 	}
 	
 	

@@ -3,6 +3,7 @@ package edu.uptc.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -116,12 +117,46 @@ public class MainPanel extends JPanel implements ActionListener {
 
 	public void revisarPrioridad(){
 
-		for (Hilo hilito : mainWindow.getMh().getHilos()) {
+		if(mainWindow.getMh().getHilos().size()==1){
 
-			ejecutarHilo(hilito);	
+			mainWindow.getMh().getHilos().get(0).setEstado("EN EJECUCION");
 
+			ejecutarHilo(mainWindow.getMh().getHilos().get(0));
+		}else{
+
+//			Hilo menor=null;
+//
+//			for (Hilo hilito : mainWindow.getMh().getHilos()) {
+//
+//				if(hilito.getEstado().equals("PENDIENTE")){
+//
+//					if(menor==null){
+//						menor=hilito;
+//					}else if(menor.getPrioridad()>hilito.getPrioridad()){
+//
+//						menor=hilito;
+//
+//					}
+//
+//				}
+//			}
+			
+			
+		
+			
+			for(Hilo hilito : mainWindow.getMh().getHilos()){
+			
+				if(hilito.getEstado().equals("PENDIENTE")){
+					
+					ejecutarHilo(hilito);
+					
+				}
+			
+			
+			}
+			
+				
 		}
-
 
 
 	}
@@ -149,8 +184,9 @@ public class MainPanel extends JPanel implements ActionListener {
 					}
 
 				}
-				
+
 				aEjecutar.setEstado("FINALIZADO");
+				Collections.sort(mainWindow.getMh().getHilos());
 				refrescarTabla();
 
 			}
@@ -167,13 +203,13 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		if(e.getSource()==btnCrear){
 
-			Hilo aux = new Hilo(generar(), txtNombre.getText(), numeroAleatorio(), "EJECUTANDOSE");
+			Hilo aux = new Hilo(generar(), txtNombre.getText(), numeroAleatorio(), "PENDIENTE");
 
 			mainWindow.getMh().getHilos().add(aux);
 
+			revisarPrioridad();
 			refrescarTabla();
 
-			revisarPrioridad();
 		}
 
 
