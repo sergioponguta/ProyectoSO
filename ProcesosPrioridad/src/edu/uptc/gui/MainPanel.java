@@ -124,44 +124,46 @@ public class MainPanel extends JPanel implements ActionListener {
 			ejecutarHilo(mainWindow.getMh().getHilos().get(0));
 		}else{
 
-//			Hilo menor=null;
-//
-//			for (Hilo hilito : mainWindow.getMh().getHilos()) {
-//
-//				if(hilito.getEstado().equals("PENDIENTE")){
-//
-//					if(menor==null){
-//						menor=hilito;
-//					}else if(menor.getPrioridad()>hilito.getPrioridad()){
-//
-//						menor=hilito;
-//
-//					}
-//
-//				}
-//			}
-			
-			
-		
-			
+			//			Hilo menor=null;
+			//
+			//			for (Hilo hilito : mainWindow.getMh().getHilos()) {
+			//
+			//				if(hilito.getEstado().equals("PENDIENTE")){
+			//
+			//					if(menor==null){
+			//						menor=hilito;
+			//					}else if(menor.getPrioridad()>hilito.getPrioridad()){
+			//
+			//						menor=hilito;
+			//
+			//					}
+			//
+			//				}
+			//			}
+
 			for(Hilo hilito : mainWindow.getMh().getHilos()){
-			
+
 				if(hilito.getEstado().equals("PENDIENTE")){
-					
+
 					ejecutarHilo(hilito);
-					
+
 				}
-			
-			
+
+
 			}
-			
-				
+
+
 		}
 
 
 	}
 
 	public void ejecutarHilo(Hilo aEjecutar){
+
+		if(!aEjecutar.getEstado().equals("EN EJECUCION")){
+			aEjecutar.setEstado("PENDIENTE.");
+		}
+
 
 
 		Thread th = new Thread(new Runnable() {
@@ -170,10 +172,11 @@ public class MainPanel extends JPanel implements ActionListener {
 			public void run() {
 
 				synchronized (btnCrear) {
+					aEjecutar.setEstado("EN EJECUCION");
 					for (int i = 1; i <= 100; i++) {
 
 						try {
-							System.out.println(i);
+							//							System.out.println(i);
 							Thread.sleep(aEjecutar.getDuracion()*10);
 							progress.setValue(i);
 						} catch (InterruptedException e) {
@@ -191,8 +194,12 @@ public class MainPanel extends JPanel implements ActionListener {
 
 			}
 
-		});
+		},aEjecutar.getNombre());
 
+		if(th.getName().equals("123")){
+			th.setPriority(Thread.MAX_PRIORITY);
+		}
+	
 		th.start();
 
 
